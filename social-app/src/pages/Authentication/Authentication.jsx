@@ -19,8 +19,8 @@ const Authentication = () =>{
                                 <h1 className="logo text-center">PhuocLocGroup Social</h1>
                                 <p className="text-center text-sm w-[70&]">Connecting Lives, Sharing Stories: Your Social World, Your Way</p>
                             </div>
-                        <Login/>
-                        {/* <Register/> */}
+                        {/* <Login/> */}
+                        <Register/>
                         </Card>
 
 
