@@ -4,6 +4,7 @@ import { Button, FormControlLabel, Radio, RadioGroup, TextField } from "@mui/mat
 import { useDispatch } from "react-redux";
 import * as Yup from "yup";
 import { registerUserAction } from "../../redux/Auth/Auth.action";
+import { useNavigate } from "react-router-dom";
 
 
 const initialValues = { firstName: "", lastName: "", email: "", password: "", gender: "" };
@@ -19,6 +20,7 @@ const validationSchema = Yup.object({
 
 const Register = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = (values) => {
     console.log("handle submit", values);
@@ -89,10 +91,15 @@ const Register = () => {
           </div>
 
           <Button sx={{ padding: ".8rem 0rem" }} fullWidth type="submit" variant="contained" color="primary">
-            Register
+            Đăng kí
           </Button>
         </Form>
       </Formik>
+      <div className="flex gap-2 items-center justify-center pt-5">
+        <p>Bạn đã có tài khoản ?</p>
+        
+        <Button onClick={() => navigate("/login")}>Đăng nhập</Button>
+      </div>
     </>
   );
 };

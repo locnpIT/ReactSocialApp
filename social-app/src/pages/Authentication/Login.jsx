@@ -4,6 +4,7 @@ import { Button, TextField } from "@mui/material";
 import { useDispatch } from "react-redux";
 import * as Yup from "yup";
 import { loginUserAction } from "../../redux/Auth/Auth.action";
+import { useNavigate } from "react-router-dom";
 
 const initialValues = { email: "", password: "" };
 
@@ -15,6 +16,7 @@ const validationSchema = Yup.object({
 const Login = () => {
   const dispatch = useDispatch();
 
+  const navigate = useNavigate();
   const handleSubmit = (values) => {
     console.log("handle submit", values);
     dispatch(loginUserAction({ data: values }));
@@ -55,10 +57,16 @@ const Login = () => {
           </div>
 
           <Button sx={{ padding: ".8rem 0rem" }} fullWidth type="submit" variant="contained" color="primary">
-            Login
+            Đăng nhập
           </Button>
         </Form>
       </Formik>
+
+      <div className="flex gap-2 items-center justify-center pt-5">
+        <p>Bạn chưa có tài khoản ?</p>
+        
+        <Button onClick={() => navigate("/register")}>Đăng kí</Button>
+      </div>
     </>
   );
 };
