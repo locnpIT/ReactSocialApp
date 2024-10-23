@@ -21,7 +21,7 @@ export const navigationMenu = [
     {
         title: "Create Reels",
         icon: <ControlPointIcon/>,
-        path: "/create"
+        path: "/create-reels"
     },
     {
         title: "Notifications",
@@ -31,7 +31,7 @@ export const navigationMenu = [
     {
         title: "Message",
         icon: <MessageIcon/>,
-        path: "/messages"
+        path: "/message"
     },
     {
         title: "List",

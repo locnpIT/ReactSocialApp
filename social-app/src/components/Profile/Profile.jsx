@@ -3,6 +3,7 @@ import React, { useState } from "react"; // Thêm useState để quản lý tr�
 import { useParams } from "react-router-dom";
 import PostCard from "../Post/PostCard";
 import UserReelCard from "../Reels/UserReelCard";
+import { useSelector } from "react-redux";
 
 const tabs = [
     { value: "post", name: "Post" },
@@ -22,6 +23,8 @@ const Profile = () => {
 
     // Sử dụng useState để quản lý giá trị của tab
     const [value, setValue] = useState("post");
+
+    const {auth}  = useSelector(store=>store);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -55,8 +58,8 @@ const Profile = () => {
                 </div>
                 <div className="p-5">
                     <div>
-                        <h1 className="py-1 font-bold text-xl">Nguyễn Phước Lộc</h1>
-                        <p>@PhuocLoc240</p>
+                        <h1 className="py-1 font-bold text-xl">{auth.user?.firstName + " " + auth.user?.lastName}</h1>
+                        <p>@{auth.user?.firstName.toLowerCase() + "_" + auth.user?.lastName.toLowerCase()}</p>
                     </div>
 
                     <div className="flex gap-5 items-center py-3">
@@ -101,7 +104,6 @@ const Profile = () => {
                         </div>) : (
                             <div>
                                 Repost
-
                             </div>
                         )}
 

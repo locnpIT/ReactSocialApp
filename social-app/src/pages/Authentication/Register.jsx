@@ -3,7 +3,7 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import { Button, FormControlLabel, Radio, RadioGroup, TextField } from "@mui/material";
 import { useDispatch } from "react-redux";
 import * as Yup from "yup";
-import { registerUserAction } from "../../redux/Auth/Auth.action";
+import { registerUserAction } from "../../redux/Auth/auth.action";
 import { useNavigate } from "react-router-dom";
 
 
