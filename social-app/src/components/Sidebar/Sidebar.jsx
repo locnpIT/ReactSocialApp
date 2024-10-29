@@ -31,7 +31,7 @@ const Sidebar = () => {
         }
         if(item.title === "Home"){
             navigate("/")
-        }
+        } 
     }
 
  

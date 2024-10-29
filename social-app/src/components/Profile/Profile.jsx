@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import PostCard from "../Post/PostCard";
 import UserReelCard from "../Reels/UserReelCard";
 import { useSelector } from "react-redux";
+import ProfileModal from "./ProfileModal";
 
 const tabs = [
     { value: "post", name: "Post" },
@@ -20,6 +21,11 @@ const savedPost = [1, 1, 1, 1, 1];
 
 const Profile = () => {
     const { id } = useParams(); // Lấy tham số id từ URL
+
+
+    const[open, setOpen] = useState(false);
+    const handleOpenProfileModal = () => setOpen(false);
+    const handleClose = () => setOpen(false);
 
     // Sử dụng useState để quản lý giá trị của tab
     const [value, setValue] = useState("post");
@@ -112,6 +118,10 @@ const Profile = () => {
 
                 </section>
             </div>
+            <section>
+                <ProfileModal open={open} handleClose={handleClose}/>
+            </section>
+
         </Card>
     );
 };
