@@ -153,7 +153,7 @@ export const getProfileAction = (jwt) => async (dispatch) => {
 export const updateProfileAction = (reqData) => async (dispatch) => {
     dispatch({ type: UPDATE_PROFILE_REQUEST });
     try {
-        const { data } = await axios.put(`${API_BASE_URL}/api/users/profile`, reqData, {
+        const { data } = await axios.put(`${API_BASE_URL}/api/users`, reqData, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("jwt")}`,
             }
@@ -165,3 +165,19 @@ export const updateProfileAction = (reqData) => async (dispatch) => {
         dispatch({ type: UPDATE_PROFILE_FAILURE, payload: error.response ? error.response.data : error });
     }
 };
+
+// export const updateProfileAction = (reqData) => async (dispatch) => {
+//     dispatch({ type: UPDATE_PROFILE_REQUEST });
+//     try {
+//         const { data } = await axios.put(`${API_BASE_URL}/api/users/profile`, reqData, {
+//             headers: {
+//                 Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+//             }
+//         });
+//         dispatch({ type: UPDATE_PROFILE_SUCESS, payload: data });
+//         console.log("profile updated", data);
+//     } catch (error) {
+//         console.error("Error updating profile:", error);
+//         dispatch({ type: UPDATE_PROFILE_FAILURE, payload: error.response ? error.response.data : error });
+//     }
+// };

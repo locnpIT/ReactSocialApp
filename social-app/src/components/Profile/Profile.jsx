@@ -24,7 +24,7 @@ const Profile = () => {
 
 
     const[open, setOpen] = useState(false);
-    const handleOpenProfileModal = () => setOpen(false);
+    const handleOpenProfileModal = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
     // Sử dụng useState để quản lý giá trị của tab
@@ -53,7 +53,7 @@ const Profile = () => {
                         src="https://scontent.fdad3-4.fna.fbcdn.net/v/t39.30808-6/453536952_1231090181241607_3482979049030780443_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeEzGEObYW-0Xm2cdGiYStkfXfMGv5_lEJld8wa_n-UQmdGtsjSZdl8FtGeRgBTuog1xE0Gq2X1iG-iYDgZdO_FS&_nc_ohc=wYnxzYchKKQQ7kNvgEQa23i&_nc_zt=23&_nc_ht=scontent.fdad3-4.fna&_nc_gid=A9lWjeKATjrGBo_Am1_N6Qw&oh=00_AYBMQm6IG3-_5894P9Teku-YcumOpgSlgLUuuvSVY7vFUw&oe=6719C0CC"
                     />
                     {true ? (
-                        <Button sx={{ borderRadius: "20px" }} variant="outlined">
+                        <Button sx={{ borderRadius: "20px" }} variant="outlined"  onClick={handleOpenProfileModal}>
                             Edit Profile
                         </Button>
                     ) : (
