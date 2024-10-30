@@ -9,32 +9,30 @@ import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 
-const PostCard = () => {
+const PostCard = ({ item }) => {
     return (
-
-        <Card className=''>
+        <Card>
             <CardHeader
                 avatar={
-                <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                    R
-                </Avatar>
+                    <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                        {item.user?.firstName?.[0] || "R"}
+                    </Avatar>
                 }
                 action={
-                <IconButton aria-label="settings">
-                    <MoreVertIcon />
-                </IconButton>
+                    <IconButton aria-label="settings">
+                        <MoreVertIcon />
+                    </IconButton>
                 }
-                title="Phuoc Loc Group"
-                subheader="@phuocloc240"
+                title={item.firstName+ " "+ item.lastName}
+                subHeader="con cho"
+            
             />
-
             <CardMedia
-                    component="img"
-                    height="194"
-                    image="https://cdn.pixabay.com/photo/2023/10/13/17/10/mushroom-8313142_1280.jpg"
-                    alt="Paella dish"
-             />
-
+                component="img"
+                height="194"
+                image="https://cdn.pixabay.com/photo/2023/10/13/17/10/mushroom-8313142_1280.jpg"
+                alt="Paella dish"
+            />
             <CardContent>
                 <Typography variant="body2" sx={{ color: 'text.secondary' }}>
                     This impressive paella is a perfect party dish and a fun meal to cook
@@ -42,35 +40,26 @@ const PostCard = () => {
                     if you like.
                 </Typography>
             </CardContent>
-
             <CardActions className='flex justify-between' disableSpacing>
                 <div>
                     <IconButton>
-                        {true?<FavoriteIcon/>:<FavoriteBorderIcon/>}
+                        <FavoriteIcon />
                     </IconButton>
-
                     <IconButton>
-                        {<ShareIcon/>}
+                        <ShareIcon />
                     </IconButton>
-
                     <IconButton>
-                        {<ChatBubbleIcon/>}
+                        <ChatBubbleIcon />
                     </IconButton>
-
                 </div>
-
                 <div>
                     <IconButton>
-                        {true?<BookmarkIcon/>:<BookmarkBorderIcon/>}
+                        <BookmarkIcon />
                     </IconButton>
                 </div>
-
             </CardActions>
+        </Card>
+    );
+};
 
-        
-        </Card>  
-    )
-
-}
-
-export default PostCard
+export default PostCard;
