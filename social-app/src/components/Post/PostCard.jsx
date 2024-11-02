@@ -24,7 +24,8 @@ const PostCard = ({ item }) => {
                     </IconButton>
                 }
                 title={item.user.firstName + " " + item.user.lastName}
-                subHeader={"@" + item.user.firstName.toLowerCase() + "_" + item.user.lastName.toLowerCase()}
+                subheader={"@"+ item.user.firstName.toLowerCase() + "_" + item.user.lastName.toLowerCase()}
+                // subheader="concac"
             
             />
             <CardMedia
