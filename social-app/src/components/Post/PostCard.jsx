@@ -23,21 +23,19 @@ const PostCard = ({ item }) => {
                         <MoreVertIcon />
                     </IconButton>
                 }
-                title={item.firstName+ " "+ item.lastName}
-                subHeader="con cho"
+                title={item.user.firstName + " " + item.user.lastName}
+                subHeader={"@" + item.user.firstName.toLowerCase() + "_" + item.user.lastName.toLowerCase()}
             
             />
             <CardMedia
                 component="img"
                 height="194"
-                image="https://cdn.pixabay.com/photo/2023/10/13/17/10/mushroom-8313142_1280.jpg"
+                image={item.image}
                 alt="Paella dish"
             />
             <CardContent>
                 <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                    This impressive paella is a perfect party dish and a fun meal to cook
-                    together with your guests. Add 1 cup of frozen peas along with the mussels,
-                    if you like.
+                  {item.caption}
                 </Typography>
             </CardContent>
             <CardActions className='flex justify-between' disableSpacing>

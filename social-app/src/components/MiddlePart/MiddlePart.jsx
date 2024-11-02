@@ -21,23 +21,15 @@ const MiddlePart = () =>{
 
     const {post} = useSelector(store => store);
 
-    
+
     console.log("post store ", post)
 
-    
     const[openCreatePostModal, setOpenCreatePostModal] = useState();
     const handleCloseCreatePostModal = () => {
         setOpenCreatePostModal(false);
     }
-
-
-
     const handleOpenCreatePostModal=()=>{
-
         setOpenCreatePostModal(true);
-
-
-
         console.log("open post model...");
     }
 
@@ -99,6 +91,7 @@ const MiddlePart = () =>{
                     </div>
             </Card>
             <div className="mt-5 space-y-5">
+           
                 {post.posts.map((item) => <PostCard item={item}/>)}
                 
 
