@@ -6,6 +6,9 @@ import AddIcCallIcon from '@mui/icons-material/AddIcCall';
 import VideoCallIcon from '@mui/icons-material/VideoCall';
 import VideoCall from "@mui/icons-material/VideoCall";
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+// import "./Message.css"
+import UserChatCard from "./UserChatCard";
+import ChatMessage from "./ChatMessage";
 
 const Message = () => {
 
@@ -36,7 +39,7 @@ const Message = () => {
                                 </div>
 
                                 <div className="h-full space-y-4 mt-5 overflow-y-scroll hideScrollbar">
-                                    UserChatCard
+                                    <UserChatCard/>
                                 </div>
                             
                             </div>
@@ -72,7 +75,7 @@ const Message = () => {
 
                         <div className="hideScrollbar overflow-y-scroll h-[82vh] px-2 space-y-5 py-5">
                             
-                            message
+                            <ChatMessage/>
 
                         </div>
 
