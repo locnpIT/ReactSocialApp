@@ -6,6 +6,9 @@ import {
     GET_PROFILE_FAILURE, GET_PROFILE_REQUEST, GET_PROFILE_SUCESS, 
     LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCESS, 
     REGISTER_FAILURE, REGISTER_REQUEST, REGISTER_SUCESS, 
+    SEARCH_USER_FAILURE, 
+    SEARCH_USER_REQUEST, 
+    SEARCH_USER_SUCESS, 
     UPDATE_PROFILE_FAILURE, UPDATE_PROFILE_REQUEST, UPDATE_PROFILE_SUCESS 
 } from "./auth.actionType";
 import { API_BASE_URL } from '../../config/api';
@@ -79,6 +82,18 @@ export const updateProfileAction = (reqData) => async (dispatch) => {
     } catch (error) {
         console.log("------", error);
         dispatch({ type: UPDATE_PROFILE_FAILURE, payload: error.response ? error.response.data : error });
+    }
+};
+
+export const searchUser = (query) => async (dispatch) => {
+    dispatch({ type: SEARCH_USER_REQUEST });
+    try {
+        const { data } = await axios.get(`/api/users/search?=${query}`);
+        console.log("search user", data);
+        dispatch({ type: SEARCH_USER_SUCESS, payload: data }); // Update based on what `data` actually contains
+    } catch (error) {
+        console.log("------", error);
+        dispatch({ type: SEARCH_USER_FAILURE, payload: error.response ? error.response.data : error });
     }
 };
 
