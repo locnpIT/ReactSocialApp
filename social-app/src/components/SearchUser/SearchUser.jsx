@@ -1,15 +1,30 @@
 import { Avatar, Card, CardHeader } from '@mui/material'
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { searchUser } from '../../redux/Auth/auth.action';
 
 
 const SearchUser = () => {
 
     const [username, setUsername] = useState("");
 
-    const handleSearchUser = (e) =>{
-        setUsername(e.target.value)
-        console.log("Search user...")
-    }
+    const dispatch = useDispatch();
+
+
+    // const handleSearchUser = (e) =>{
+    //     setUsername(e.target.value)
+    //     console.log("Search user...");
+    //     dispatch(searchUser(username))
+    // };
+
+    const handleSearchUser = (e) => {
+        const query = e.target.value;
+        setUsername(query); 
+        if (query.trim()) {
+            console.log("Search user...");
+            dispatch(searchUser(query));
+        }
+    };
 
     const handleClick = (id) =>{
         console.log(id)

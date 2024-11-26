@@ -88,12 +88,16 @@ export const updateProfileAction = (reqData) => async (dispatch) => {
 export const searchUser = (query) => async (dispatch) => {
     dispatch({ type: SEARCH_USER_REQUEST });
     try {
-        const { data } = await axios.get(`/api/users/search?=${query}`);
+        const { data } = await axios.get(`${API_BASE_URL}/api/users/search?query=${query}`,{
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("jwt")}`
+            }}
+        );
         console.log("search user", data);
         dispatch({ type: SEARCH_USER_SUCESS, payload: data }); // Update based on what `data` actually contains
     } catch (error) {
         console.log("------", error);
-        dispatch({ type: SEARCH_USER_FAILURE, payload: error.response ? error.response.data : error });
+        dispatch({ type: SEARCH_USER_FAILURE, payload: error });
     }
 };
 
