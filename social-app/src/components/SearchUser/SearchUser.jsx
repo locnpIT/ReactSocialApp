@@ -1,7 +1,8 @@
 import { Avatar, Card, CardHeader } from '@mui/material'
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { searchUser } from '../../redux/Auth/auth.action';
+import { createChat } from '../../redux/Message/message.action';
 
 
 const SearchUser = () => {
@@ -10,25 +11,22 @@ const SearchUser = () => {
 
     const dispatch = useDispatch();
 
+    const {message, auth} = useSelector(store => store);
 
-    // const handleSearchUser = (e) =>{
-    //     setUsername(e.target.value)
-    //     console.log("Search user...");
-    //     dispatch(searchUser(username))
-    // };
+   
 
     const handleSearchUser = (e) => {
         const query = e.target.value;
         setUsername(query); 
         if (query.trim()) {
-            console.log("Search user...");
+            console.log("Search user...", auth.searchUser);
             dispatch(searchUser(query));
         }
     };
 
     const handleClick = (id) =>{
-        console.log(id)
-    }
+        dispatch(createChat({userId:id}))
+    };
 
     return(
         <div>
@@ -39,21 +37,23 @@ const SearchUser = () => {
                 type='text'/>
 
                 {
-                    username && (<Card className="absolute w-full z-10 top-[4.5rem] cursor-pointer">
+                    username && (
+                    auth.searchUser.map((item) => 
+                    <Card key={item.id} className="absolute w-full z-10 top-[4.5rem] cursor-pointer">
                         
                         <CardHeader onClick={()=>{
-                            handleClick();
+                            handleClick(item.id);
                             setUsername("")
                         }}
                         avatar={<Avatar src='https://images.pexels.com/photos/733767/pexels-photo-733767.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'/>}
 
-                        title="Nguyen Phuoc Loc"
-                        subheader={"nguyenphuocloc"}
+                        title={item.firstName + " " + item.lastName}
+                        subheader={item.firstName.toLowerCase() + " " + item.lastName.toLowerCase()}
 
                         />
 
                     </Card>
-
+                    )
                 )}
 
             </div>

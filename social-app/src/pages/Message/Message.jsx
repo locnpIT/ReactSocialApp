@@ -1,5 +1,5 @@
 import { Avatar, Grid, IconButton } from "@mui/material"
-import React from "react"
+import React, { useEffect, useState } from "react"
 import WestIcon from '@mui/icons-material/West';
 import SearchUser from './../../components/SearchUser/SearchUser';
 import AddIcCallIcon from '@mui/icons-material/AddIcCall';
@@ -9,11 +9,36 @@ import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 // import "./Message.css"
 import UserChatCard from "./UserChatCard";
 import ChatMessage from "./ChatMessage";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllChats } from "../../redux/Message/message.action";
+
+import ChatBubbleOutlineIcon  from '@mui/icons-material/ChatBubbleOutline';
 
 const Message = () => {
 
+
+    const dispatch = useDispatch();
+    const {message, auth}=useSelector(store=>store);
+    const [currentChat,setCurrentChat]=useState();
+    const [messages,setMessages] = useState();
+    const [selectedImage,setSelectedImage] = useState();
+
+    useEffect(() => {
+        dispatch(getAllChats());
+    }, [])
+
+    console.log("chats--------", message.chats)
+
     const handleSelectImage = () =>{
         console.log("Handle select image")
+    }
+
+    const handleCreateMessage=(value)=>{
+        const message ={
+            chatId:currentChat.id,
+            content:value,
+            image:selectedImage
+        }
     }
 
     return (
@@ -39,7 +64,22 @@ const Message = () => {
                                 </div>
 
                                 <div className="h-full space-y-4 mt-5 overflow-y-scroll hideScrollbar">
-                                    <UserChatCard/>
+                                    {
+                                       message.chats.map((item)=> {
+                                            return <div onClick={()=> {
+                                                setCurrentChat(item)
+                                                setMessages(item.messages)
+                                            }}>
+                                            <UserChatCard chat={item}/>
+                                            </div>
+
+                                        
+                                        }) 
+                                    }
+
+
+
+                                   
                                 </div>
                             
                             </div>
@@ -50,14 +90,14 @@ const Message = () => {
                 </Grid>
 
                 <Grid className="h-full" item xs={9}>
-                    <div>
+                    {currentChat ? <div>
                         
                         <div className="flex justify-between items-center border-1 p-5">
                     
                             <div className="flex items-center space-x-3">
                                 
                                 <Avatar src="https://images.pexels.com/photos/733767/pexels-photo-733767.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"/>
-                                <p>Phuoc Loc Nguyen</p>
+                                <p>{ auth.user.id===currentChat.users[0].id?currentChat.users[1].firstName+" "+currentChat.users[1].lastName:currentChat.users[0].firstName+" "+currentChat.users[0].lastName}</p>
 
                             </div>
 
@@ -79,8 +119,6 @@ const Message = () => {
 
                         </div>
 
-                    </div>
-
                     <div className="sticky bottom-0 border-l">
                         <div className="py-5 flex items-center justify-center space-x-5">
                             <input className="bg-transparent border border-[#3b40544] rounded-full w-[90%] py-3 px-5" placeholder="Type message..." type="text" />
@@ -97,6 +135,14 @@ const Message = () => {
 
                         </div>
                     </div>
+                    </div>: 
+                    
+                    <div className="h-full space-y-5 flex flex-col justify-center items-center">
+                        <ChatBubbleOutlineIcon sx={{fontSize:"15rem"}}/>
+                        <p className="text-xl font-semibold">No chat selected</p>
+
+                    </div>}
+
 
                 </Grid>
             </Grid>

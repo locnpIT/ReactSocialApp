@@ -1,10 +1,11 @@
-import { GET_PROFILE_REQUEST, GET_PROFILE_SUCESS, LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCESS, REGISTER_FAILURE, REGISTER_REQUEST, REGISTER_SUCESS, UPDATE_PROFILE_SUCESS } from "./auth.actionType";
+import { GET_PROFILE_REQUEST, GET_PROFILE_SUCESS, LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCESS, REGISTER_FAILURE, REGISTER_REQUEST, REGISTER_SUCESS, SEARCH_USER_SUCESS, UPDATE_PROFILE_SUCESS } from "./auth.actionType";
 
 const initialState={
     jwt:null,
     error:null,
     loading:false,
-    user:null
+    user:null,
+    searchUser:[]
 }
 
 export const authReducer = (state = initialState, action ) =>{
@@ -26,6 +27,9 @@ export const authReducer = (state = initialState, action ) =>{
             return{
                 ...state, jwt:action.payload, loading:false, error:null        
             }
+        case SEARCH_USER_SUCESS:
+            return {...state, searchUser:action.payload, loading:false, error:null}
+        
 
         case LOGIN_FAILURE:
         case REGISTER_FAILURE:
