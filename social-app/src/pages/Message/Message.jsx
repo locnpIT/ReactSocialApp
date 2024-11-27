@@ -10,9 +10,10 @@ import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import UserChatCard from "./UserChatCard";
 import ChatMessage from "./ChatMessage";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllChats } from "../../redux/Message/message.action";
+import { createMessage, getAllChats } from "../../redux/Message/message.action";
 
 import ChatBubbleOutlineIcon  from '@mui/icons-material/ChatBubbleOutline';
+import { uploadToCloudinary } from './../../util/uuploadToCloudniry';
 
 const Message = () => {
 
@@ -22,6 +23,8 @@ const Message = () => {
     const [currentChat,setCurrentChat]=useState();
     const [messages,setMessages] = useState();
     const [selectedImage,setSelectedImage] = useState();
+    const [loading, setLoading] = useState(false);
+
 
     useEffect(() => {
         dispatch(getAllChats());
@@ -29,8 +32,13 @@ const Message = () => {
 
     console.log("chats--------", message.chats)
 
-    const handleSelectImage = () =>{
+    const handleSelectImage = async(e) =>{
+        setLoading(true);
         console.log("Handle select image")
+        const imgUrl = await uploadToCloudinary(e.target.files[0], "image")
+        selectedImage(imgUrl)
+        setLoading(false)
+        
     }
 
     const handleCreateMessage=(value)=>{
@@ -38,7 +46,8 @@ const Message = () => {
             chatId:currentChat.id,
             content:value,
             image:selectedImage
-        }
+        };
+        dispatch(createMessage(message));
     }
 
     return (
@@ -115,13 +124,20 @@ const Message = () => {
 
                         <div className="hideScrollbar overflow-y-scroll h-[82vh] px-2 space-y-5 py-5">
                             
-                            <ChatMessage/>
+                            {messages.map((item) => <ChatMessage message={item}/>) }
 
                         </div>
 
                     <div className="sticky bottom-0 border-l">
                         <div className="py-5 flex items-center justify-center space-x-5">
-                            <input className="bg-transparent border border-[#3b40544] rounded-full w-[90%] py-3 px-5" placeholder="Type message..." type="text" />
+                            <input 
+                            onKeyPress={(e) => {
+                                if(e.key==="Enter" && e.target.value){
+                                    handleCreateMessage(e.target.value)
+
+                                }
+                            }}
+                            className="bg-transparent border border-[#3b40544] rounded-full w-[90%] py-3 px-5" placeholder="Type message..." type="text" />
 
                             <div>
                                 <input type="file" accept="image/*" onChange={handleSelectImage} className="hidden" id="image-input" />

@@ -5,7 +5,7 @@ export const createMessage= (message) => async(dispatch) =>{
 
     dispatch({type:actionType.CREATE_MESSAGE_SUCCESS})
     try {
-        const {data} = await api.post(`/api/message`, message);
+        const {data} = await api.post(`/api/messages/chat/${message.chatId}`, message);
         console.log("create message", data)
         dispatch({type:actionType.CREATE_MESSAGE_SUCCESS, payload:data})
         
