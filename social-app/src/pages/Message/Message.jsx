@@ -15,6 +15,8 @@ import { createMessage, getAllChats } from "../../redux/Message/message.action";
 import ChatBubbleOutlineIcon  from '@mui/icons-material/ChatBubbleOutline';
 import { uploadToCloudinary } from './../../util/uuploadToCloudniry';
 
+import { useNavigate } from "react-router-dom";
+
 const Message = () => {
 
 
@@ -24,7 +26,7 @@ const Message = () => {
     const [messages,setMessages] = useState([]);
     const [selectedImage,setSelectedImage] = useState();
     const [loading, setLoading] = useState(false);
-
+    const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(getAllChats());
@@ -61,13 +63,12 @@ const Message = () => {
                     <div className="flex h-full justify-between space-x-2">
 
                         <div className="w-full">
-                            <div className="flex space-x-4 items-center py-5">
-                                <WestIcon/>
-                                <h1 className="text-xl font-bold">
-                                    Home
-                                </h1>
-
-                            </div>
+                        <div className="flex space-x-4 items-center py-5 cursor-pointer" onClick={() => navigate("/")}>
+                            <WestIcon />
+                            <h1 className="text-xl font-bold">
+                                Home
+                            </h1>
+                        </div>
 
                             <div className="h-[83vh]">
                                 
@@ -77,18 +78,31 @@ const Message = () => {
                                 </div>
 
                                 <div className="h-full space-y-4 mt-5 overflow-y-scroll hideScrollbar">
+                                
                                     {
-                                       message.chats.map((item)=> {
-                                            return <div onClick={()=> {
-                                                setCurrentChat(item)
-                                                setMessages(item.messages)
-                                            }}>
-                                            <UserChatCard chat={item}/>
-                                            </div>
-
-                                        
-                                        }) 
-                                    }
+                                        Array.isArray(message.chats)
+                                            ? message.chats.map((item) => (
+                                                <div
+                                                key={item.id}
+                                                onClick={() => {
+                                                    setCurrentChat(item);
+                                                    setMessages(item.messages || []);
+                                                }}
+                                                >
+                                                <UserChatCard chat={item} />
+                                                </div>
+                                            ))
+                                            : message.chats && (
+                                                <div
+                                                onClick={() => {
+                                                    setCurrentChat(message.chats);
+                                                    setMessages(message.chats.messages || []);
+                                                }}
+                                                >
+                                                <UserChatCard chat={message.chats} />
+                                                </div>
+                                            )
+                                        }
 
 
 

@@ -9,6 +9,7 @@ import PostCard from './../Post/PostCard';
 import CreatePostModal from "../CreatePost/CreatePostModal";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllPostAction } from "../../redux/Post/post.action";
+import { red } from "@mui/material/colors";
 
 
 
@@ -20,6 +21,8 @@ const MiddlePart = () =>{
     const dispatch = useDispatch();
 
     const {post} = useSelector(store => store);
+
+    const {auth} = useSelector(store => store);
 
 
     console.log("post store ", post)
@@ -57,7 +60,9 @@ const MiddlePart = () =>{
             </section>
             <Card className="p-5 mt-5">
                     <div className="flex justify-between">
-                        <Avatar />
+                    <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                        {auth.user.firstName[0] || "?"}
+                    </Avatar>
                         <input 
                         onClick={handleOpenCreatePostModal}
                         readOnly className="outline-none w-[90%] rounded-full px-5 

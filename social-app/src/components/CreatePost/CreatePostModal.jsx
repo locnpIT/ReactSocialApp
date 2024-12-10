@@ -5,7 +5,7 @@ import { Formik, useFormik } from "formik";
 import ImageIcon from '@mui/icons-material/Image';
 import VideoCallIcon from '@mui/icons-material/VideoCall'
 import { uploadToCloudinary } from "../../util/uuploadToCloudniry";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { createCommentAction, createPostAction } from "../../redux/Post/post.action";
 const style = {
     position: 'absolute',
@@ -29,6 +29,7 @@ const CreatePostModal = ({handleClose, open}) => {
     const[selectedVideo, setSelectedVideo] = useState();
     const [isLoading, setIsLoading] = useState(false);
     const dispatch = useDispatch();
+    const {auth}  = useSelector(store=>store);
 
     const handleSelectImage = async(event) => {
 
@@ -79,10 +80,12 @@ const CreatePostModal = ({handleClose, open}) => {
             <form onSubmit={formik.handleSubmit}>
             <div>
                 <div className = "flex space-x-4 items-center">
-                    <Avatar/>
+                    <Avatar>
+                       
+                    </Avatar>
                     <div>
-                        <p className="font-bold text-lg">Toi la dan choi Nguyen Phuoc Loc</p>
-                        <p className="text-sm">@NguuyenPhuocLoc</p>
+                        <p className="font-bold text-lg">{auth.user?.firstName + " " + auth.user?.lastName}</p>
+                        <p className="text-sm">@{auth.user?.firstName.toLowerCase() + "_" + auth.user?.lastName.toLowerCase()}</p>
 
                     </div>
 

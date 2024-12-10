@@ -5,6 +5,7 @@ import PostCard from "../Post/PostCard";
 import UserReelCard from "../Reels/UserReelCard";
 import { useSelector } from "react-redux";
 import ProfileModal from "./ProfileModal";
+import { red } from "@mui/material/colors";
 
 const tabs = [
     { value: "post", name: "Post" },
@@ -20,14 +21,14 @@ const savedPost = [1, 1, 1, 1, 1];
 
 
 const Profile = () => {
-    const { id } = useParams(); // Lấy tham số id từ URL
+    const { id } = useParams(); 
 
 
     const[open, setOpen] = useState(false);
     const handleOpenProfileModal = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    // Sử dụng useState để quản lý giá trị của tab
+
     const [value, setValue] = useState("post");
 
     const {auth}  = useSelector(store=>store);
@@ -49,9 +50,11 @@ const Profile = () => {
                 <div className="px-5 flex justify-between items-start mt-5 h-[5rem]">
                     <Avatar
                         className="transform -translate-y-24"
-                        sx={{ width: "10rem", height: "10rem" }}
-                        src="https://scontent.fdad3-4.fna.fbcdn.net/v/t39.30808-6/453536952_1231090181241607_3482979049030780443_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeEzGEObYW-0Xm2cdGiYStkfXfMGv5_lEJld8wa_n-UQmdGtsjSZdl8FtGeRgBTuog1xE0Gq2X1iG-iYDgZdO_FS&_nc_ohc=wYnxzYchKKQQ7kNvgEQa23i&_nc_zt=23&_nc_ht=scontent.fdad3-4.fna&_nc_gid=A9lWjeKATjrGBo_Am1_N6Qw&oh=00_AYBMQm6IG3-_5894P9Teku-YcumOpgSlgLUuuvSVY7vFUw&oe=6719C0CC"
-                    />
+                        sx={{ width: "10rem", height: "10rem", bgcolor: red[500] }}
+
+                    >
+                        {auth.user.firstName[0] || "?"}
+                    </Avatar>
                     {true ? (
                         <Button sx={{ borderRadius: "20px" }} variant="outlined"  onClick={handleOpenProfileModal}>
                             Edit Profile
@@ -94,18 +97,18 @@ const Profile = () => {
                     
                     <div className="flex justify-center">
                         {value ==="post" ? (<div className="space-y-5 w-[70%] my-10"> 
-                            {posts.map((item) => 
+                            {/* {posts.map((item) => 
                                 <div className="border border-slate-100"> <PostCard/> </div>
-                            )}
+                            )} */}
                             
                         </div>) :value === "reels"? 
                         (<div className="my-10 flex justify-center flex-wrap gap-2">
                             {reels.map((item) => <UserReelCard/>)}
                         </div>) : value === "saved"? 
                         (<div className="space-y-5 w-[100%] my-10"> 
-                            {posts.map((item) => 
+                            {/* {posts.map((item) => 
                                 <div className="border border-slate-100"> <PostCard/> </div>
-                            )}
+                            )} */}
                             
                         </div>) : (
                             <div>

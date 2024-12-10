@@ -25,7 +25,7 @@ export const loginUserAction = (loginData, navigate) => async (dispatch) => {
         console.log("login", data);
         dispatch({ type: LOGIN_SUCESS, payload: data.token });
 
-        
+        navigate("/");
     } catch (error) {
         console.log("------", error);
         dispatch({ type: LOGIN_FAILURE, payload: error.response ? error.response.data : error });
@@ -44,7 +44,7 @@ export const registerUserAction = (registerData, navigate) => async (dispatch) =
         dispatch({ type: REGISTER_SUCESS, payload: data.token });
 
         // Navigate to the home page after successful registration
-        navigate("/");
+        navigate("/login");
     } catch (error) {
         console.log("------", error);
         dispatch({ type: REGISTER_FAILURE, payload: error.response ? error.response.data : error });
@@ -101,18 +101,3 @@ export const searchUser = (query) => async (dispatch) => {
     }
 };
 
-// export const updateProfileAction = (reqData) => async (dispatch) => {
-//     dispatch({ type: UPDATE_PROFILE_REQUEST });
-//     try {
-//         const { data } = await axios.put(`${API_BASE_URL}/api/users/profile`, reqData, {
-//             headers: {
-//                 Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-//             }
-//         });
-//         dispatch({ type: UPDATE_PROFILE_SUCESS, payload: data });
-//         console.log("profile updated", data);
-//     } catch (error) {
-//         console.error("Error updating profile:", error);
-//         dispatch({ type: UPDATE_PROFILE_FAILURE, payload: error.response ? error.response.data : error });
-//     }
-// };

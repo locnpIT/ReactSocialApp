@@ -98,19 +98,24 @@ const PostCard = ({ item }) => {
 
                 </div>
                 <Divider/>
-                <div className="mx-3 space-y-2 my-5 text-xs">
-                   
-                   
-                        {item.comments?.map((comment) => <div className="flex items-center space-x-5">
-                            <Avatar sx={{height:"2rem", width:"2rem", fontSize:".8rem"}}>
-                                {comment.user.firstName[0]}
+                <div className="mx-3 my-5 text-xs space-y-4">
+                    {item.comments?.map((comment, index) => (
+                        <div key={index} className="flex items-start space-x-3">
+                            <Avatar sx={{ height: "2rem", width: "2rem", fontSize: ".8rem" }}>
+                                {comment.user?.firstName[0] || "?"}
                             </Avatar>
-
-                            <p>{comment.content}</p>
-
-                        </div>) }
-
+                            <div className="flex flex-col">
+                                <p className="font-semibold">
+                                    {comment.user
+                                        ? `${comment.user.firstName} ${comment.user.lastName}`
+                                        : "Unknown User"}
+                                </p>
+                                <p className="text-gray-600">{comment.content}</p>
+                            </div>
+                        </div>
+                    ))}
                 </div>
+
                 
 
             </section>}

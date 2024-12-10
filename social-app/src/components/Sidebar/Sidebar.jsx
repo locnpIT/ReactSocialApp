@@ -8,6 +8,7 @@ import { navigationMenu } from './SidebarNavigation';
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import { useSelector } from 'react-redux';
 import { Navigate, useNavigate } from 'react-router-dom';
+import { red } from '@mui/material/colors';
 
 const Sidebar = () => {
 
@@ -59,7 +60,9 @@ const Sidebar = () => {
                 <Divider />
                 <div className="pl-5 flex items-center justify-between pt-5">
                     <div className="flex items-center space-x-3">
-                        <Avatar src="https://example.com/avatar.jpg" />
+                    <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                        {auth.user.firstName[0] || "?"}
+                    </Avatar>
                         <div>
                             <p className="font-bold">{auth.user?.firstName + " " + auth.user?.lastName}</p>
                             <p className="opacity-70">@{auth.user?.firstName.toLowerCase() + "_" + auth.user?.lastName.toLowerCase()}</p>
