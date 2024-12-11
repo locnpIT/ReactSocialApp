@@ -45,7 +45,7 @@ const SearchUser = () => {
                             handleClick(item.id);
                             setUsername("")
                         }}
-                        avatar={<Avatar src='https://images.pexels.com/photos/733767/pexels-photo-733767.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'/>}
+                        avatar={<Avatar src='https://commons.wikimedia.org/wiki/File:Sample_User_Icon.png'/>}
 
                         title={item.firstName + " " + item.lastName}
                         subheader={item.firstName.toLowerCase() + " " + item.lastName.toLowerCase()}

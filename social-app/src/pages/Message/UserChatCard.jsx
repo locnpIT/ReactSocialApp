@@ -31,7 +31,7 @@ const UserChatCard = ({ chat }) => {
                             bgcolor: "#191c29",
                             color: "rgb(88,199,250)",
                         }}
-                        src="https://images.pexels.com/photos/733767/pexels-photo-733767.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                        src="https://commons.wikimedia.org/wiki/File:Sample_User_Icon.png"
                     />
                 }
                 action={
